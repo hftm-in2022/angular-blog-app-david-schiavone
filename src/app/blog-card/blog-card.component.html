@@ -1,6 +1,11 @@
-@if (blog?.headerImageUrl) {
-  <img [src]="blog?.headerImageUrl" [alt]="blog?.title" />
-} @else {
-  <img src="https://placehold.co/800x200" alt="placeholder" />
-}
-<h2>{{ blog?.title }}</h2>
+<div class="blog-card">
+  @if (blog?.headerImageUrl) {
+    <img [src]="blog?.headerImageUrl" [alt]="blog?.title" />
+  } @else {
+    <img src="https://placehold.co/800x200" alt="placeholder" />
+  }
+  <h2>{{ blog?.title }}</h2>
+  <div class="blog-card__content">
+    <p>{{ blog?.contentPreview }}</p>
+  </div>
+</div>

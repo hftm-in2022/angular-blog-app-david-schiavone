@@ -1,4 +1,5 @@
 <main class="main">
+  <h1>Blog</h1>
   <div class="content" *ngIf="blogs$ | async as blogs">
     @for (blog of blogs.data; track blog.id) {
       <app-blog-card [blog]="blog"></app-blog-card>
