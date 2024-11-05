@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../services/blog.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
-import { EMPTY, Observable } from 'rxjs';
 import { Blogs } from '../model/blogs';
 
 @Component({
@@ -13,11 +12,13 @@ import { Blogs } from '../model/blogs';
   styleUrl: './blog-overview.component.scss',
 })
 export class BlogOverviewComponent implements OnInit {
-  blogs$: Observable<Blogs> = EMPTY;
+  blogs?: Blogs = undefined;
 
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
-    this.blogs$ = this.blogService.loadBlogs();
+    this.blogService.loadBlogs().subscribe((blogs) => {
+      this.blogs = blogs;
+    });
   }
 }
