@@ -1,14 +1,26 @@
 import { Routes } from '@angular/router';
-import { BlogOverviewComponent } from './blog-overview/blog-overview.component';
-import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { blogResolver } from './resolver/blog-detail-resolver';
+import { blogsResolver } from './resolver/blog-overview-resolver';
 
 export const routes: Routes = [
   {
     path: '',
-    component: BlogOverviewComponent,
+    loadComponent: () =>
+      import('./blog-overview/blog-overview.component').then(
+        (m) => m.BlogOverviewComponent,
+      ),
+    resolve: {
+      blogs: blogsResolver,
+    },
   },
   {
     path: 'blogs/:blogId',
-    component: BlogDetailComponent,
+    loadComponent: () =>
+      import('./blog-detail/blog-detail.component').then(
+        (m) => m.BlogDetailComponent,
+      ),
+    resolve: {
+      blog: blogResolver,
+    },
   },
 ];

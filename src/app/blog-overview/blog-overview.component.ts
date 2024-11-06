@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from '../services/blog.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
 import { Blogs } from '../model/blogs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-blog-overview',
@@ -14,11 +14,9 @@ import { Blogs } from '../model/blogs';
 export class BlogOverviewComponent implements OnInit {
   blogs?: Blogs = undefined;
 
-  constructor(private blogService: BlogService) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.blogService.loadBlogs().subscribe((blogs) => {
-      this.blogs = blogs;
-    });
+    this.blogs = this.route.snapshot.data['blogs'];
   }
 }
