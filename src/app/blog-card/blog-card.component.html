@@ -16,5 +16,6 @@
   <div class="blog-card__content">
     <h2>{{ blog?.title }}</h2>
     <p>{{ blog?.contentPreview }}</p>
+    <a [routerLink]="['/blogs', blog?.id]">Weitere Infos...</a>
   </div>
 </div>
