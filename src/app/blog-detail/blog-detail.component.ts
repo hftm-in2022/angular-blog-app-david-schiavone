@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Blog } from '../model/blog';
 import { Comment } from '../model/comment';
+import { BlogHeaderComponent } from '../blog-header/blog-header.component';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, BlogHeaderComponent],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.scss',
 })
@@ -17,6 +18,7 @@ export class BlogDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.blog = this.route.snapshot.data['blog'];
+    console.log(typeof this.blog?.createdAt);
   }
 
   getComments(): Comment[] {
@@ -25,5 +27,12 @@ export class BlogDetailComponent implements OnInit {
     }
 
     return [];
+  }
+
+  getLocalizedDateString(dateStr?: string): string {
+    if (dateStr !== undefined) {
+      return new Date(dateStr).toLocaleString();
+    }
+    return '';
   }
 }

@@ -1,18 +1,35 @@
-<h1>{{ blog?.title }}</h1>
-<a routerLink="/">< Zurück zur Übersicht</a>
-<p>Veröffentlicht am {{ blog?.createdAt }}</p>
-<figure>
+<app-blog-header [title]="blog?.title ?? ''"></app-blog-header>
+
+<div class="blog-detail">
+  <a class="button" routerLink="/">Zurück zur Übersicht</a>
+  <div class="blog-detail--meta">
+    <p class="meta-info">
+      Veröffentlicht am {{ getLocalizedDateString(blog?.createdAt) }}
+    </p>
+    <p>Autor: {{ blog?.author }}</p>
+  </div>
+  <!--  <figure>-->
   @if (blog?.headerImageUrl) {
     <img [src]="blog?.headerImageUrl" [alt]="blog?.title" />
   } @else {
     <img src="https://placehold.co/800x200" alt="placeholder" />
   }
-</figure>
-<p>Autor: {{ blog?.author }}</p>
-<p>{{ blog?.content }}</p>
+  <!--  </figure>-->
+  <p>{{ blog?.content }}</p>
 
-<h2>Kommentare</h2>
-@for (comment of getComments(); track comment.id) {
-  <p>{{ comment.content }}</p>
-  <hr />
-}
+  @if (getComments().length > 0) {
+    <h2>Kommentare</h2>
+    @for (comment of getComments(); track comment.id) {
+      <div class="blog-detail--comment">
+        <p>{{ comment.content }}</p>
+        <div class="blog-detail--comment__meta">
+          <p class="meta-info">
+            {{ getLocalizedDateString(comment.createdAt) }}
+          </p>
+          <p>{{ comment.author }}</p>
+        </div>
+      </div>
+      <hr />
+    }
+  }
+</div>

@@ -3,11 +3,12 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
 import { Blogs } from '../model/blogs';
 import { ActivatedRoute } from '@angular/router';
+import { BlogHeaderComponent } from '../blog-header/blog-header.component';
 
 @Component({
   selector: 'app-blog-overview',
   standalone: true,
-  imports: [AsyncPipe, BlogCardComponent, NgIf],
+  imports: [AsyncPipe, BlogCardComponent, NgIf, BlogHeaderComponent],
   templateUrl: './blog-overview.component.html',
   styleUrl: './blog-overview.component.scss',
 })
