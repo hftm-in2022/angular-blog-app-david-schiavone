@@ -1,0 +1,8 @@
+<app-blog-header title="Blogs"></app-blog-header>
+<div class="content">
+  @if (blogs) {
+    @for (blog of blogs.data; track blog.id) {
+      <app-blog-card [blog]="blog"></app-blog-card>
+    }
+  }
+</div>
