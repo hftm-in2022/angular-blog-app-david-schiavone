@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Blog } from '../model/blog';
 import { Comment } from '../model/comment';
@@ -12,18 +12,17 @@ import { BlogHeaderComponent } from '../blog-header/blog-header.component';
   styleUrl: './blog-detail.component.scss',
 })
 export class BlogDetailComponent implements OnInit {
-  blog?: Blog = undefined;
+  blog: WritableSignal<Blog | undefined> = signal(undefined);
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.blog = this.route.snapshot.data['blog'];
-    console.log(typeof this.blog?.createdAt);
+    this.blog.set(this.route.snapshot.data['blog']);
   }
 
-  getComments(): Comment[] {
-    if (this.blog?.comments instanceof Array) {
-      return this.blog?.comments;
+  getComments(blog?: Blog): Comment[] {
+    if (blog?.comments instanceof Array) {
+      return blog.comments;
     }
 
     return [];

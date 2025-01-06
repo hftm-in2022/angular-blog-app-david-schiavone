@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
-import { Blogs } from '../model/blogs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogHeaderComponent } from '../blog-header/blog-header.component';
+import { Blog } from '../model/blog';
 
 @Component({
   selector: 'app-blog-overview',
   standalone: true,
-  imports: [AsyncPipe, BlogCardComponent, NgIf, BlogHeaderComponent],
+  imports: [BlogCardComponent, BlogHeaderComponent],
   templateUrl: './blog-overview.component.html',
   styleUrl: './blog-overview.component.scss',
 })
 export class BlogOverviewComponent implements OnInit {
-  blogs?: Blogs = undefined;
+  blogs: WritableSignal<Blog[]> = signal([]);
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.blogs = this.route.snapshot.data['blogs'];
+    this.blogs.set(this.route.snapshot.data['blogs'].data);
   }
 }
