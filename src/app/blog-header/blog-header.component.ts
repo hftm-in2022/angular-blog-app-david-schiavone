@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-blog-header',
@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   imports: [],
   templateUrl: './blog-header.component.html',
   styleUrl: './blog-header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogHeaderComponent {
   @Input() title = '';

@@ -1,4 +1,10 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Blog } from '../model/blog';
 import { Comment } from '../model/comment';
@@ -10,6 +16,7 @@ import { BlogHeaderComponent } from '../blog-header/blog-header.component';
   imports: [RouterLink, BlogHeaderComponent],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogDetailComponent implements OnInit {
   blog: WritableSignal<Blog | undefined> = signal(undefined);
