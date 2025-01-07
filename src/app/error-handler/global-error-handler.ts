@@ -2,7 +2,7 @@ import { ErrorHandler, Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationService } from '../services/notification.service'; // Optional: Loggingservice zum Senden von Fehlerlogs an einen Server
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class GlobalErrorHandler implements ErrorHandler {
   constructor(private notificationService: NotificationService) {}
 

@@ -1,9 +1,13 @@
 import {
   ApplicationConfig,
-  ErrorHandler,
+  inject,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  NavigationError,
+  provideRouter,
+  withNavigationErrorHandler,
+} from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -14,12 +18,17 @@ import { GlobalErrorHandler } from './error-handler/global-error-handler';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withNavigationErrorHandler((e: NavigationError) =>
+        inject(GlobalErrorHandler).handleError(e),
+      ),
+    ),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler,
-    },
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: GlobalErrorHandler,
+    // },
   ],
 };
