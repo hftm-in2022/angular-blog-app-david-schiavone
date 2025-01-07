@@ -1,35 +1,45 @@
-<app-blog-header [title]="blog()?.title ?? ''"></app-blog-header>
-
-<div class="blog-detail">
-  <a class="button" routerLink="/">Zurück zur Übersicht</a>
-  <div class="blog-detail--meta">
-    <p class="meta-info">
-      Veröffentlicht am {{ getLocalizedDateString(blog()?.createdAt) }}
-    </p>
-    <p>Autor: {{ blog()?.author }}</p>
+@if (state().loading) {
+  <div class="spinner-overlay">
+    <mat-spinner></mat-spinner>
   </div>
-  <!--  <figure>-->
-  @if (blog()?.headerImageUrl) {
-    <img [src]="blog()?.headerImageUrl" [alt]="blog()?.title" />
-  } @else {
-    <img src="https://placehold.co/800x200" alt="placeholder" />
-  }
-  <!--  </figure>-->
-  <p>{{ blog()?.content }}</p>
+} @else {
+  <app-blog-header [title]="state().blogDetail!.title"></app-blog-header>
 
-  @if (getComments(blog()).length > 0) {
-    <h2>Kommentare</h2>
-    @for (comment of getComments(blog()); track comment.id) {
-      <div class="blog-detail--comment">
-        <p>{{ comment.content }}</p>
-        <div class="blog-detail--comment__meta">
-          <p class="meta-info">
-            {{ getLocalizedDateString(comment.createdAt) }}
-          </p>
-          <p>{{ comment.author }}</p>
-        </div>
-      </div>
-      <hr />
+  <div class="blog-detail">
+    <a class="button" routerLink="/">Zurück zur Übersicht</a>
+    <div class="blog-detail--meta">
+      <p class="meta-info">
+        Veröffentlicht am
+        {{ getLocalizedDateString(state().blogDetail!.createdAt) }}
+      </p>
+      <p>Autor: {{ state().blogDetail!.author }}</p>
+    </div>
+    <!--  <figure>-->
+    @if (state().blogDetail!.headerImageUrl) {
+      <img
+        [src]="state().blogDetail!.headerImageUrl"
+        [alt]="state().blogDetail!.title"
+      />
+    } @else {
+      <img src="https://placehold.co/800x200" alt="placeholder" />
     }
-  }
-</div>
+    <!--  </figure>-->
+    <p>{{ state().blogDetail!.content }}</p>
+
+    @if (getComments(state().blogDetail!).length > 0) {
+      <h2>Kommentare</h2>
+      @for (comment of getComments(state().blogDetail!); track comment.id) {
+        <div class="blog-detail--comment">
+          <p>{{ comment.content }}</p>
+          <div class="blog-detail--comment__meta">
+            <p class="meta-info">
+              {{ getLocalizedDateString(comment.createdAt) }}
+            </p>
+            <p>{{ comment.author }}</p>
+          </div>
+        </div>
+        <hr />
+      }
+    }
+  </div>
+}

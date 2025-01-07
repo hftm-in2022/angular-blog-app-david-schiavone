@@ -1,6 +1,12 @@
-<app-blog-header title="Blogs"></app-blog-header>
-<div class="content">
-  @for (blog of blogs(); track blog.id) {
-    <app-blog-card [blog]="blog"></app-blog-card>
-  }
-</div>
+@if (state().loading) {
+  <div class="spinner-overlay">
+    <mat-spinner></mat-spinner>
+  </div>
+} @else {
+  <app-blog-header title="Blogs"></app-blog-header>
+  <div class="content">
+    @for (blog of state().blogs!.data; track blog.id) {
+      <app-blog-card [blog]="blog"></app-blog-card>
+    }
+  </div>
+}
