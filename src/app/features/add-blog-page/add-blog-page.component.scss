@@ -1,0 +1,57 @@
+.add-blog {
+  padding: 25px 300px;
+
+  form {
+    width: 100%;
+    max-width: 600px;
+    margin: 25px auto 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    div {
+      margin-bottom: 20px;
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: none;
+          border-color: #5a9bd5;
+        }
+      }
+
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      small {
+        color: #d9534f;
+        font-size: 12px;
+        display: block;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .form-buttons {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+  }
+}
