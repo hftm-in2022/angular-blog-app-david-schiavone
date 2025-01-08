@@ -31,6 +31,7 @@ module.exports = tseslint.config(
         },
       ],
       "@typescript-eslint/no-explicit-any": "off",
+
       // there seems to be a bug in eslint: https://github.com/typescript-eslint/typescript-eslint/issues/10338
       "@typescript-eslint/no-unused-expressions": "off",
       "@typescript-eslint/no-empty-function": "off",
@@ -42,6 +43,9 @@ module.exports = tseslint.config(
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
-    rules: {},
+    rules: {
+      "@angular-eslint/template/click-events-have-key-events": "off",
+      "@angular-eslint/template/interactive-supports-focus": "off",
+    },
   },
 );

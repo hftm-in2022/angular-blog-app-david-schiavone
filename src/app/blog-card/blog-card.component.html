@@ -17,6 +17,8 @@
     <h2>{{ blog?.title }}</h2>
     <p>{{ blog?.contentPreview }}</p>
     <hr />
-    <a class="button" [routerLink]="['/blogs', blog?.id]">Details</a>
+    <a class="button button-blue" [routerLink]="['/blogs', blog?.id]"
+      >Details</a
+    >
   </div>
 </div>
