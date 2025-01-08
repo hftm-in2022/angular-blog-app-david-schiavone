@@ -8,10 +8,11 @@ import {
 import { BlogHeaderComponent } from '../../blog-header/blog-header.component';
 import { BlogService } from '../../services/blog.service';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-blog-page',
-  imports: [BlogHeaderComponent, ReactiveFormsModule],
+  imports: [BlogHeaderComponent, ReactiveFormsModule, RouterLink],
   templateUrl: './add-blog-page.component.html',
   styleUrl: './add-blog-page.component.scss',
 })
@@ -51,5 +52,10 @@ export class AddBlogPageComponent {
     this.oidcService.getAccessToken().subscribe((token) => {
       this.blogService.addBlog(this.blogForm.value, token).subscribe();
     });
+  }
+
+  reset() {
+    this.blogForm.get('title')?.setValue('');
+    this.blogForm.get('content')?.setValue('');
   }
 }
