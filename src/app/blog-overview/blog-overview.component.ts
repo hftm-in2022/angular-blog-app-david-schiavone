@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  WritableSignal,
+} from '@angular/core';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
-import { Blogs } from '../model/blogs';
-import { ActivatedRoute } from '@angular/router';
 import { BlogHeaderComponent } from '../blog-header/blog-header.component';
+import { StateService } from '../services/redux/state.service';
+import { AppState } from '../services/redux/app-state';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-blog-overview',
   standalone: true,
-  imports: [AsyncPipe, BlogCardComponent, NgIf, BlogHeaderComponent],
+  imports: [BlogCardComponent, BlogHeaderComponent, MatProgressSpinner],
   templateUrl: './blog-overview.component.html',
   styleUrl: './blog-overview.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BlogOverviewComponent implements OnInit {
-  blogs?: Blogs = undefined;
+export class BlogOverviewComponent {
+  state: WritableSignal<AppState>;
 
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.blogs = this.route.snapshot.data['blogs'];
+  constructor(private stateService: StateService) {
+    this.state = this.stateService.getState();
   }
 }

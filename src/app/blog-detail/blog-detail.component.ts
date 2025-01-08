@@ -1,29 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  WritableSignal,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Blog } from '../model/blog';
 import { Comment } from '../model/comment';
 import { BlogHeaderComponent } from '../blog-header/blog-header.component';
+import { AppState } from '../services/redux/app-state';
+import { StateService } from '../services/redux/state.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [RouterLink, BlogHeaderComponent],
+  imports: [RouterLink, BlogHeaderComponent, MatProgressSpinner],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BlogDetailComponent implements OnInit {
-  blog?: Blog = undefined;
+export class BlogDetailComponent {
+  state: WritableSignal<AppState>;
 
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.blog = this.route.snapshot.data['blog'];
-    console.log(typeof this.blog?.createdAt);
+  constructor(private stateService: StateService) {
+    this.state = this.stateService.getState();
   }
 
-  getComments(): Comment[] {
-    if (this.blog?.comments instanceof Array) {
-      return this.blog?.comments;
+  getComments(blog?: Blog): Comment[] {
+    if (blog?.comments instanceof Array) {
+      return blog.comments;
     }
 
     return [];
