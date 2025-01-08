@@ -45,6 +45,23 @@ h6 {
       outline: 3px solid #80d4ff;
       outline-offset: 2px;
     }
+
+    &.disabled,
+    &:disabled {
+      background-color: #b3d9ff;
+      color: #e6f3ff;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: #b3d9ff;
+        transform: none;
+        outline: none;
+      }
+    }
   }
 
   &-white {

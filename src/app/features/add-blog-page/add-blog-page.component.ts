@@ -9,10 +9,11 @@ import { BlogHeaderComponent } from '../../blog-header/blog-header.component';
 import { BlogService } from '../../services/blog.service';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-add-blog-page',
-  imports: [BlogHeaderComponent, ReactiveFormsModule, RouterLink],
+  imports: [BlogHeaderComponent, ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './add-blog-page.component.html',
   styleUrl: './add-blog-page.component.scss',
 })

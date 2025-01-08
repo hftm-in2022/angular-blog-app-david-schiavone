@@ -61,7 +61,13 @@
       }
 
       <div class="form-buttons">
-        <input class="button button-blue" type="submit" value="Speichern" />
+        <input
+          class="button button-blue"
+          type="submit"
+          value="Speichern"
+          [ngClass]="{ disabled: !blogForm.valid }"
+          [disabled]="!blogForm.valid"
+        />
         <input
           type="button"
           class="button button-white"
