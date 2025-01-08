@@ -1,80 +1,87 @@
 <app-blog-header title="Blog erstellen"></app-blog-header>
-<div class="add-blog">
-  <a class="button button-blue" routerLink="/">Zurück zur Übersicht</a>
 
-  <form [formGroup]="blogForm" (ngSubmit)="submit()">
-    <div>
-      <label for="title">Titel*:</label>
-      <input
-        id="title"
-        formControlName="title"
-        placeholder="Geben Sie einen Titel ein"
-      />
-      @if (blogForm.get("title")?.invalid && blogForm.get("title")?.touched) {
-        <div>
-          @if (blogForm.get("title")?.errors?.["required"]) {
-            <small>Dies ist ein Pflichtfeld</small>
-          }
-          @if (blogForm.get("title")?.errors?.["minlength"]) {
-            <small
-              >Der Titel muss mindestens {{ titleMinLength }} Zeichen lang
-              sein.</small
-            >
-          }
-          @if (blogForm.get("title")?.errors?.["maxlength"]) {
-            <small
-              >Der Titel darf maximal {{ titleMaxLength }} Zeichen lang
-              sein.</small
-            >
-          }
-        </div>
-      }
-    </div>
+@if (state().loading) {
+  <div class="spinner-overlay">
+    <mat-spinner></mat-spinner>
+  </div>
+} @else {
+  <div class="add-blog">
+    <a class="button button-blue" routerLink="/">Zurück zur Übersicht</a>
 
-    <div>
-      <label for="content">Inhalt*:</label>
-      <textarea
-        id="content"
-        formControlName="content"
-        placeholder="Geben Sie den Inhalt ein"
-      ></textarea>
-      @if (
-        blogForm.get("content")?.invalid && blogForm.get("content")?.touched
-      ) {
-        <div>
-          @if (blogForm.get("content")?.errors?.["required"]) {
-            <small>Dies ist ein Pflichtfeld</small>
-          }
-          @if (blogForm.get("content")?.errors?.["minlength"]) {
-            <small
-              >Der Inhalt muss mindestens {{ contentMinLength }} Zeichen lang
-              sein.</small
-            >
-          }
-          @if (blogForm.get("content")?.errors?.["maxlength"]) {
-            <small
-              >Der Inthal darf maximal {{ contentMaxLength }} Zeichen lang
-              sein.</small
-            >
-          }
-        </div>
-      }
-
-      <div class="form-buttons">
+    <form [formGroup]="blogForm" (ngSubmit)="submit()">
+      <div>
+        <label for="title">Titel*:</label>
         <input
-          class="button button-blue"
-          type="submit"
-          value="Speichern"
-          [ngClass]="{ disabled: !blogForm.valid }"
-          [disabled]="!blogForm.valid"
+          id="title"
+          formControlName="title"
+          placeholder="Geben Sie einen Titel ein"
         />
-        <input
-          type="button"
-          class="button button-white"
-          value="Zurücksetzen"
-          (click)="reset()"
-        />
+        @if (blogForm.get("title")?.invalid && blogForm.get("title")?.touched) {
+          <div>
+            @if (blogForm.get("title")?.errors?.["required"]) {
+              <small>Dies ist ein Pflichtfeld</small>
+            }
+            @if (blogForm.get("title")?.errors?.["minlength"]) {
+              <small
+                >Der Titel muss mindestens {{ titleMinLength }} Zeichen lang
+                sein.</small
+              >
+            }
+            @if (blogForm.get("title")?.errors?.["maxlength"]) {
+              <small
+                >Der Titel darf maximal {{ titleMaxLength }} Zeichen lang
+                sein.</small
+              >
+            }
+          </div>
+        }
       </div>
-    </div>
-  </form>
-</div>
+
+      <div>
+        <label for="content">Inhalt*:</label>
+        <textarea
+          id="content"
+          formControlName="content"
+          placeholder="Geben Sie den Inhalt ein"
+        ></textarea>
+        @if (
+          blogForm.get("content")?.invalid && blogForm.get("content")?.touched
+        ) {
+          <div>
+            @if (blogForm.get("content")?.errors?.["required"]) {
+              <small>Dies ist ein Pflichtfeld</small>
+            }
+            @if (blogForm.get("content")?.errors?.["minlength"]) {
+              <small
+                >Der Inhalt muss mindestens {{ contentMinLength }} Zeichen lang
+                sein.</small
+              >
+            }
+            @if (blogForm.get("content")?.errors?.["maxlength"]) {
+              <small
+                >Der Inthal darf maximal {{ contentMaxLength }} Zeichen lang
+                sein.</small
+              >
+            }
+          </div>
+        }
+
+        <div class="form-buttons">
+          <input
+            class="button button-blue"
+            type="submit"
+            value="Speichern"
+            [ngClass]="{ disabled: !blogForm.valid }"
+            [disabled]="!blogForm.valid"
+          />
+          <input
+            type="button"
+            class="button button-white"
+            value="Zurücksetzen"
+            (click)="reset()"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+}
