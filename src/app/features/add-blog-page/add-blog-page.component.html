@@ -1,6 +1,6 @@
 <app-blog-header title="Blog hinzufügen"></app-blog-header>
 
-<form [formGroup]="blogForm">
+<form [formGroup]="blogForm" (ngSubmit)="submit()">
   <div>
     <label for="title">Titel*:</label>
     <input
@@ -55,5 +55,7 @@
         }
       </div>
     }
+
+    <input type="submit" value="Speichern" />
   </div>
 </form>

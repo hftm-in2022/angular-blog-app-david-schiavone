@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { BlogHeaderComponent } from '../../blog-header/blog-header.component';
+import { BlogService } from '../../services/blog.service';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-add-blog-page',
@@ -20,7 +22,11 @@ export class AddBlogPageComponent {
   readonly contentMinLength = 5;
   readonly contentMaxLength = 5000;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private blogService: BlogService,
+    private oidcService: OidcSecurityService,
+  ) {
     this.blogForm = this.formBuilder.group({
       title: [
         '',
@@ -38,6 +44,12 @@ export class AddBlogPageComponent {
           Validators.maxLength(this.contentMaxLength),
         ],
       ],
+    });
+  }
+
+  submit() {
+    this.oidcService.getAccessToken().subscribe((token) => {
+      this.blogService.addBlog(this.blogForm.value, token).subscribe();
     });
   }
 }
