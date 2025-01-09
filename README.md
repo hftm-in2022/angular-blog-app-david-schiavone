@@ -65,11 +65,11 @@ You can find more information about the setup in the following file: [SETUP.md](
 
 ## Directory structure
 
-The code is found in the [app](src/app) directory.
-In the [core](src/app/core) directory you can find all core functionalities.
-In the [features](src/app/features) directory are the pages and other components.
-In the [model](src/app/model) directory are ts models which are used in the project.
-In the [services](src/app/services) you can find the services of the project
+The code is found in the [app](src/app) directory.  
+In the [core](src/app/core) directory you can find all core functionalities.  
+In the [features](src/app/features) directory are the pages and other components.  
+In the [model](src/app/model) directory are ts models which are used in the project.  
+In the [services](src/app/services) you can find the services of the project.
 
 ## State management
 
