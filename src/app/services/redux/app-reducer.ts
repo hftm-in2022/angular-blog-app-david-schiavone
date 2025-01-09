@@ -8,6 +8,8 @@ export function appReducer(state: AppState, action: AppStateAction): AppState {
       return { ...state, blogs: action.payload };
     case 'BLOG_DETAIL_LOADED':
       return { ...state, blogDetail: action.payload };
+    case 'SET_PAGE_TITLE':
+      return { ...state, pageTitle: action.payload };
     default:
       return state;
   }
