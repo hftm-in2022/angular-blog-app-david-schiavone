@@ -10,7 +10,7 @@
     @if (blog?.headerImageUrl) {
       <img [src]="blog?.headerImageUrl" [alt]="blog?.title" />
     } @else {
-      <img src="https://placehold.co/800x200" alt="placeholder" />
+      <img src="/fallback-img.png" alt="placeholder" />
     }
   </figure>
   <div class="blog-card__content">

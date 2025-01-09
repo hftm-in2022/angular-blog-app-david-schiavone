@@ -12,16 +12,14 @@
       </p>
       <p>Autor: {{ state().blogDetail!.author }}</p>
     </div>
-    <!--  <figure>-->
     @if (state().blogDetail!.headerImageUrl) {
       <img
         [src]="state().blogDetail!.headerImageUrl"
         [alt]="state().blogDetail!.title"
       />
     } @else {
-      <img src="https://placehold.co/800x200" alt="placeholder" />
+      <img src="/fallback-img.png" alt="placeholder" />
     }
-    <!--  </figure>-->
     <p>{{ state().blogDetail!.content }}</p>
 
     @if (getComments(state().blogDetail!).length > 0) {
