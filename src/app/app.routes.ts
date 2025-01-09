@@ -32,4 +32,11 @@ export const routes: Routes = [
       ),
     canActivate: [isAuthenticatedGuard],
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./core/page-not-found/page-not-found.component').then(
+        (m) => m.PageNotFoundComponent,
+      ),
+  },
 ];
