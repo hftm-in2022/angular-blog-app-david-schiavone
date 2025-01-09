@@ -1,7 +1,7 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 
 export const isAuthenticatedGuard: CanActivateFn = () => {
   const oidcSecurityService = inject(OidcSecurityService);

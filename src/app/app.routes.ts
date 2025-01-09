@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { blogResolver } from './resolver/blog-detail-resolver';
-import { blogsResolver } from './resolver/blog-overview-resolver';
-import { isAuthenticatedGuard } from './guards/is-authenticated-guard';
+import { blogResolver } from './core/resolver/blog-detail-resolver';
+import { blogsResolver } from './core/resolver/blog-overview-resolver';
+import { isAuthenticatedGuard } from './core/guards/is-authenticated-guard';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./blog-overview/blog-overview.component').then(
+      import('./features/blog-overview/blog-overview.component').then(
         (m) => m.BlogOverviewComponent,
       ),
     resolve: {
@@ -17,7 +17,7 @@ export const routes: Routes = [
   {
     path: 'blogs/:blogId',
     loadComponent: () =>
-      import('./blog-detail/blog-detail.component').then(
+      import('./features/blog-detail/blog-detail.component').then(
         (m) => m.BlogDetailComponent,
       ),
     resolve: {

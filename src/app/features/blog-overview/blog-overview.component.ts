@@ -4,8 +4,8 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
-import { StateService } from '../services/redux/state.service';
-import { AppState } from '../services/redux/app-state';
+import { StateService } from '../../services/redux/state.service';
+import { AppState } from '../../services/redux/app-state';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({

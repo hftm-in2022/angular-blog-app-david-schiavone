@@ -4,10 +4,10 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Blog } from '../model/blog';
-import { Comment } from '../model/comment';
-import { AppState } from '../services/redux/app-state';
-import { StateService } from '../services/redux/state.service';
+import { Blog } from '../../model/blog';
+import { Comment } from '../../model/comment';
+import { AppState } from '../../services/redux/app-state';
+import { StateService } from '../../services/redux/state.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({

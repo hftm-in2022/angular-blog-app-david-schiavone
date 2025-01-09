@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Blog } from '../model/blog';
+import { Blog } from '../../model/blog';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 

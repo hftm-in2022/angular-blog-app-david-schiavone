@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { BlogService } from '../services/blog.service';
-import { Blogs } from '../model/blogs';
-import { StateService } from '../services/redux/state.service';
+import { BlogService } from '../../services/blog.service';
+import { Blogs } from '../../model/blogs';
+import { StateService } from '../../services/redux/state.service';
 import { tap } from 'rxjs';
 
 export const blogsResolver: ResolveFn<Blogs> = () => {

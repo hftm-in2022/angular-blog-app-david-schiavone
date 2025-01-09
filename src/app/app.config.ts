@@ -15,10 +15,10 @@ import {
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
-import { authInterceptor } from './interceptor/http-interceptor';
+import { authInterceptor } from './core/interceptor/http-interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { GlobalErrorHandler } from './error-handler/global-error-handler';
-import { authConfig } from './auth/auth.config';
+import { GlobalErrorHandler } from './core/error-handler/global-error-handler';
+import { authConfig } from './core/auth/auth.config';
 import { AuthInterceptor, provideAuth } from 'angular-auth-oidc-client';
 
 export const appConfig: ApplicationConfig = {
