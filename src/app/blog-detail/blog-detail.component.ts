@@ -6,7 +6,6 @@ import {
 import { RouterLink } from '@angular/router';
 import { Blog } from '../model/blog';
 import { Comment } from '../model/comment';
-import { BlogHeaderComponent } from '../blog-header/blog-header.component';
 import { AppState } from '../services/redux/app-state';
 import { StateService } from '../services/redux/state.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -14,7 +13,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [RouterLink, BlogHeaderComponent, MatProgressSpinner],
+  imports: [RouterLink, MatProgressSpinner],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +23,10 @@ export class BlogDetailComponent {
 
   constructor(private stateService: StateService) {
     this.state = this.stateService.getState();
+    this.stateService.dispatch({
+      type: 'SET_PAGE_TITLE',
+      payload: this.state().blogDetail?.title,
+    });
   }
 
   getComments(blog?: Blog): Comment[] {

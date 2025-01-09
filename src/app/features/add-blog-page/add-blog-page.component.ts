@@ -5,7 +5,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BlogHeaderComponent } from '../../blog-header/blog-header.component';
 import { BlogService } from '../../services/blog.service';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Router, RouterLink } from '@angular/router';
@@ -16,13 +15,7 @@ import { StateService } from '../../services/redux/state.service';
 
 @Component({
   selector: 'app-add-blog-page',
-  imports: [
-    BlogHeaderComponent,
-    ReactiveFormsModule,
-    RouterLink,
-    NgClass,
-    MatProgressSpinner,
-  ],
+  imports: [ReactiveFormsModule, RouterLink, NgClass, MatProgressSpinner],
   templateUrl: './add-blog-page.component.html',
   styleUrl: './add-blog-page.component.scss',
 })
@@ -62,6 +55,10 @@ export class AddBlogPageComponent {
     });
 
     this.state = this.stateService.getState();
+    this.stateService.dispatch({
+      type: 'SET_PAGE_TITLE',
+      payload: 'Blog erstellen',
+    });
   }
 
   submit() {
