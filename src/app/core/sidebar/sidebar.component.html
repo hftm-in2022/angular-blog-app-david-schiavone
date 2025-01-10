@@ -9,6 +9,7 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item routerLink="/">Übersicht</a>
       @if (canAddBlogs()) {
         <a mat-list-item routerLink="/add-blog">Erstellen</a>
       }
