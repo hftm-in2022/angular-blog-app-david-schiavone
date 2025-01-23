@@ -6,7 +6,7 @@
   <div class="blog-detail page-content">
     <a class="button button-blue" routerLink="/">Zurück zur Übersicht</a>
     <div class="blog-detail--meta">
-      <p class="meta-info">
+      <p class="meta-info" data-testid="blog-publishdate">
         Veröffentlicht am
         {{ getLocalizedDateString(state().blogDetail!.createdAt) }}
       </p>
@@ -20,13 +20,13 @@
     } @else {
       <img src="/fallback-img.png" alt="placeholder" />
     }
-    <p>{{ state().blogDetail!.content }}</p>
+    <p data-testid="blog-content">{{ state().blogDetail!.content }}</p>
 
     @if (getComments(state().blogDetail!).length > 0) {
       <h2>Kommentare</h2>
       @for (comment of getComments(state().blogDetail!); track comment.id) {
         <div class="blog-detail--comment">
-          <p>{{ comment.content }}</p>
+          <p data-testid="blog-comment-content">{{ comment.content }}</p>
           <div class="blog-detail--comment__meta">
             <p class="meta-info">
               {{ getLocalizedDateString(comment.createdAt) }}
