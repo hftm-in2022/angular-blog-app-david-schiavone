@@ -75,3 +75,8 @@ In the [services](src/app/services) you can find the services of the project.
 
 State management is implemented with the redux-pattern.
 The code for the state management is in the [redux](src/app/services/redux) directory.
+
+## Testing
+
+To run tests with coverage  
+`ng test --code-coverage`
