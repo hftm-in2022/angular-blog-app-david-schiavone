@@ -8,14 +8,18 @@
   }
   <figure>
     @if (blog?.headerImageUrl) {
-      <img [src]="blog?.headerImageUrl" [alt]="blog?.title" />
+      <img
+        data-testid="header-image"
+        [src]="blog?.headerImageUrl"
+        [alt]="blog?.title"
+      />
     } @else {
       <img src="/fallback-img.png" alt="placeholder" />
     }
   </figure>
   <div class="blog-card__content">
-    <h2>{{ blog?.title }}</h2>
-    <p>{{ blog?.contentPreview }}</p>
+    <h2 data-testid="title">{{ blog?.title }}</h2>
+    <p data-testid="blog-preview">{{ blog?.contentPreview }}</p>
     <hr />
     <a class="button button-blue" [routerLink]="['/blogs', blog?.id]"
       >Details</a
