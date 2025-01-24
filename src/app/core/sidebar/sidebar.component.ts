@@ -1,6 +1,6 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -13,6 +13,7 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { UserService } from '../../services/user.service';
 import { StateService } from '../../services/redux/state.service';
 import { AppState } from '../../services/redux/app-state';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,6 +29,8 @@ import { AppState } from '../../services/redux/app-state';
     AsyncPipe,
     RouterOutlet,
     RouterLink,
+    TranslatePipe,
+    NgClass,
   ],
 })
 export class SidebarComponent {
@@ -37,11 +40,13 @@ export class SidebarComponent {
   userName = signal<string>('');
   canAddBlogs = signal<boolean>(false);
   state: WritableSignal<AppState>;
+  languages = ['en', 'de'];
 
   constructor(
     private oidcSecureService: OidcSecurityService,
     private userService: UserService,
     private stateService: StateService,
+    private translate: TranslateService,
   ) {
     this.oidcSecureService.checkAuth().subscribe((loginResponse) => {
       this.loggedIn.set(loginResponse.isAuthenticated);
@@ -54,6 +59,10 @@ export class SidebarComponent {
     });
 
     this.state = this.stateService.getState();
+
+    this.translate.addLangs(this.languages);
+    this.translate.setDefaultLang('en');
+    this.translate.use('de');
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -69,5 +78,17 @@ export class SidebarComponent {
 
   logout() {
     this.oidcSecureService.logoff().subscribe();
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+  }
+
+  getLanguageKey(language: string) {
+    return 'language_' + language;
+  }
+
+  isCurrentLanguage(language: string): boolean {
+    return this.translate.currentLang == language;
   }
 }

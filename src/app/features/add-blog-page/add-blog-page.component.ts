@@ -12,10 +12,17 @@ import { NgClass } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { AppState } from '../../services/redux/app-state';
 import { StateService } from '../../services/redux/state.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-blog-page',
-  imports: [ReactiveFormsModule, RouterLink, NgClass, MatProgressSpinner],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    NgClass,
+    MatProgressSpinner,
+    TranslatePipe,
+  ],
   templateUrl: './add-blog-page.component.html',
   styleUrl: './add-blog-page.component.scss',
 })
@@ -34,6 +41,7 @@ export class AddBlogPageComponent {
     private oidcService: OidcSecurityService,
     private stateService: StateService,
     private router: Router,
+    private translateService: TranslateService,
   ) {
     this.blogForm = this.formBuilder.group({
       title: [
@@ -55,9 +63,11 @@ export class AddBlogPageComponent {
     });
 
     this.state = this.stateService.getState();
-    this.stateService.dispatch({
-      type: 'SET_PAGE_TITLE',
-      payload: 'Blog erstellen',
+    this.translateService.get('createBlog').subscribe((translation) => {
+      this.stateService.dispatch({
+        type: 'SET_PAGE_TITLE',
+        payload: translation,
+      });
     });
   }
 

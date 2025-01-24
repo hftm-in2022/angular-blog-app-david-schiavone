@@ -4,62 +4,62 @@
   </div>
 } @else {
   <div class="add-blog page-content">
-    <a class="button button-blue" routerLink="/">Zurück zur Übersicht</a>
+    <a class="button button-blue" routerLink="/">{{
+      "backToOverview" | translate
+    }}</a>
 
     <form [formGroup]="blogForm" (ngSubmit)="submit()">
       <div>
-        <label for="title">Titel*:</label>
+        <label for="title">{{ "addBlogTitle" | translate }}*:</label>
         <input
           id="title"
           formControlName="title"
-          placeholder="Geben Sie einen Titel ein"
+          placeholder="{{ 'addBlogTitlePlaceholder' | translate }}"
         />
         @if (blogForm.get("title")?.invalid && blogForm.get("title")?.touched) {
           <div>
             @if (blogForm.get("title")?.errors?.["required"]) {
-              <small>Dies ist ein Pflichtfeld</small>
+              <small>{{ "requiredField" | translate }}</small>
             }
             @if (blogForm.get("title")?.errors?.["minlength"]) {
-              <small
-                >Der Titel muss mindestens {{ titleMinLength }} Zeichen lang
-                sein.</small
-              >
+              <small>{{
+                "titleMinLengthError" | translate: { minLength: titleMinLength }
+              }}</small>
             }
             @if (blogForm.get("title")?.errors?.["maxlength"]) {
-              <small
-                >Der Titel darf maximal {{ titleMaxLength }} Zeichen lang
-                sein.</small
-              >
+              <small>{{
+                "titleMaxLengthError" | translate: { maxLength: titleMaxLength }
+              }}</small>
             }
           </div>
         }
       </div>
 
       <div>
-        <label for="content">Inhalt*:</label>
+        <label for="content">{{ "addBlogContent" | translate }}*:</label>
         <textarea
           id="content"
           formControlName="content"
-          placeholder="Geben Sie den Inhalt ein"
+          placeholder="{{ 'addBlogContentPlaceHolder' | translate }}"
         ></textarea>
         @if (
           blogForm.get("content")?.invalid && blogForm.get("content")?.touched
         ) {
           <div>
             @if (blogForm.get("content")?.errors?.["required"]) {
-              <small>Dies ist ein Pflichtfeld</small>
+              <small>{{ "requiredField" | translate }}</small>
             }
             @if (blogForm.get("content")?.errors?.["minlength"]) {
-              <small
-                >Der Inhalt muss mindestens {{ contentMinLength }} Zeichen lang
-                sein.</small
-              >
+              <small>{{
+                "contentMinLengthError"
+                  | translate: { minLength: contentMinLength }
+              }}</small>
             }
             @if (blogForm.get("content")?.errors?.["maxlength"]) {
-              <small
-                >Der Inthal darf maximal {{ contentMaxLength }} Zeichen lang
-                sein.</small
-              >
+              <small>{{
+                "contentMaxLengthError"
+                  | translate: { maxLength: contentMaxLength }
+              }}</small>
             }
           </div>
         }
@@ -68,14 +68,14 @@
           <input
             class="button button-blue"
             type="submit"
-            value="Speichern"
+            value="{{ 'save' | translate }}"
             [ngClass]="{ disabled: !blogForm.valid }"
             [disabled]="!blogForm.valid"
           />
           <input
             type="button"
             class="button button-white"
-            value="Zurücksetzen"
+            value="{{ 'reset' | translate }}"
             (click)="reset()"
           />
         </div>

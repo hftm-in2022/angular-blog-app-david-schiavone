@@ -21,8 +21,8 @@
     <h2 data-testid="title">{{ blog?.title }}</h2>
     <p data-testid="blog-preview">{{ blog?.contentPreview }}</p>
     <hr />
-    <a class="button button-blue" [routerLink]="['/blogs', blog?.id]"
-      >Details</a
-    >
+    <a class="button button-blue" [routerLink]="['/blogs', blog?.id]">{{
+      "details" | translate
+    }}</a>
   </div>
 </div>

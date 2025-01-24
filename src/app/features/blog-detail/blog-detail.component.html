@@ -4,13 +4,15 @@
   </div>
 } @else {
   <div class="blog-detail page-content">
-    <a class="button button-blue" routerLink="/">Zurück zur Übersicht</a>
+    <a class="button button-blue" routerLink="/">{{
+      "backToOverview" | translate
+    }}</a>
     <div class="blog-detail--meta">
       <p class="meta-info" data-testid="blog-publishdate">
-        Veröffentlicht am
+        {{ "publishedAt" | translate }}
         {{ getLocalizedDateString(state().blogDetail!.createdAt) }}
       </p>
-      <p>Autor: {{ state().blogDetail!.author }}</p>
+      <p>{{ "author" | translate }}: {{ state().blogDetail!.author }}</p>
     </div>
     @if (state().blogDetail!.headerImageUrl) {
       <img
@@ -23,7 +25,7 @@
     <p data-testid="blog-content">{{ state().blogDetail!.content }}</p>
 
     @if (getComments(state().blogDetail!).length > 0) {
-      <h2>Kommentare</h2>
+      <h2>{{ "comments" | translate }}</h2>
       @for (comment of getComments(state().blogDetail!); track comment.id) {
         <div class="blog-detail--comment">
           <p data-testid="blog-comment-content">{{ comment.content }}</p>
