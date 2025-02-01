@@ -1,21 +1,24 @@
 import { Blogs } from '../../model/blogs';
 import { Blog } from '../../model/blog';
 
-export interface AppState {
+export type AppState = {
+  // besser mit type alias arbeiten anstelle interfaces
   loading: boolean;
   blogs?: Blogs;
   blogDetail?: Blog;
   pageTitle: string;
-}
+};
 
-export interface AppStateAction {
+// ich würde verschiedene States machen pro Page..  oder dann union types
+
+export type AppStateAction = {
   type:
     | 'SET_LOADING'
     | 'BLOGS_LOADED'
     | 'BLOG_DETAIL_LOADED'
     | 'SET_PAGE_TITLE';
   payload: any;
-}
+};
 
 export const initialState: AppState = {
   loading: false,
@@ -23,3 +26,5 @@ export const initialState: AppState = {
   blogDetail: undefined,
   pageTitle: 'Blogs',
 };
+
+// der App state gehört in die state.service.td Datei

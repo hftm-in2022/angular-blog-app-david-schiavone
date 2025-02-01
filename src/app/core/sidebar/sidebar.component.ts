@@ -35,8 +35,8 @@ export class SidebarComponent {
 
   loggedIn = signal<boolean>(false);
   userName = signal<string>('');
-  canAddBlogs = signal<boolean>(false);
-  state: WritableSignal<AppState>;
+  canAddBlogs = signal<boolean>(false); // diese States besser in einen StateService oder von OAuthService verwenden
+  state: WritableSignal<AppState>; // solte ein Signal sein und nicht WritableSignal
 
   constructor(
     private oidcSecureService: OidcSecurityService,

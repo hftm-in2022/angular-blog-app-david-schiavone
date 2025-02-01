@@ -65,6 +65,7 @@ export class AddBlogPageComponent {
     this.stateService.dispatch({ type: 'SET_LOADING', payload: true });
 
     this.oidcService.getAccessToken().subscribe((token) => {
+      // token kann über den AuthInterceptor in den request geschrieben werden
       this.blogService.addBlog(this.blogForm.value, token).subscribe(() => {
         this.stateService.dispatch({ type: 'SET_LOADING', payload: true });
         this.router.navigate(['/']);
@@ -73,6 +74,7 @@ export class AddBlogPageComponent {
   }
 
   reset() {
+    // ein button vom type = reset macht automatisch ein reset
     this.blogForm.get('title')?.setValue('');
     this.blogForm.get('content')?.setValue('');
   }

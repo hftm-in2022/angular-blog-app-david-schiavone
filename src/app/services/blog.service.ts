@@ -12,10 +12,10 @@ export class BlogService {
   constructor(private http: HttpClient) {}
 
   private readonly apiUrl =
-    'https://d-cap-blog-backend---v2.whitepond-b96fee4b.westeurope.azurecontainerapps.io';
+    'https://d-cap-blog-backend---v2.whitepond-b96fee4b.westeurope.azurecontainerapps.io'; // besser mit environments arbeiten
 
   loadBlogs(): Observable<Blogs> {
-    return this.http.get<Blogs>(`${this.apiUrl}/entries`);
+    return this.http.get<Blogs>(`${this.apiUrl}/entries`); // validierung fehlt
   }
 
   loadBlog(blogId: number) {
@@ -24,7 +24,7 @@ export class BlogService {
 
   addBlog(blog: AddBlog, oidcToken: string): Observable<Blog> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${oidcToken}`,
+      Authorization: `Bearer ${oidcToken}`, // kann mittels secureRoutes und authInterceptor gelöst werden
     });
     return this.http.post<Blog>(`${this.apiUrl}/entries`, blog, {
       headers: headers,

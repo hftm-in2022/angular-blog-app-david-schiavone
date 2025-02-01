@@ -21,6 +21,8 @@ export class BlogOverviewComponent {
 
   constructor(private stateService: StateService) {
     this.stateService.dispatch({ type: 'SET_PAGE_TITLE', payload: 'Blogs' });
-    this.state = this.stateService.getState();
+    this.state = this.stateService.getState(); // hier wäre es besser nur einen Teil des Models zu selektieren
+
+    // warum die Daten aus dem Resolver nicht als input definieren?
   }
 }

@@ -14,3 +14,5 @@ export function appReducer(state: AppState, action: AppStateAction): AppState {
       return state;
   }
 }
+
+// was passiert bei einem Error?

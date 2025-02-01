@@ -31,6 +31,7 @@ export class BlogDetailComponent {
 
   getComments(blog?: Blog): Comment[] {
     if (blog?.comments instanceof Array) {
+      // Array.isArray()
       return blog.comments;
     }
 
@@ -38,6 +39,7 @@ export class BlogDetailComponent {
   }
 
   getLocalizedDateString(dateStr?: string): string {
+    // anstelle Methode kann eine pipe verwendet werden
     if (dateStr !== undefined) {
       return new Date(dateStr).toLocaleString();
     }

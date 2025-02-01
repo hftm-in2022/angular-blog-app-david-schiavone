@@ -9,7 +9,8 @@ export class StateService {
   private state = signal<AppState>(initialState);
 
   getState() {
-    return this.state;
+    // warum nicht einfach ein public property?
+    return this.state; // .asReadonly !! hier gibst du ein WritableSignal zurück.
   }
 
   dispatch(action: AppStateAction) {
