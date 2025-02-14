@@ -9,11 +9,12 @@ import { Comment } from '../../model/comment';
 import { AppState } from '../../services/redux/app-state';
 import { StateService } from '../../services/redux/state.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [RouterLink, MatProgressSpinner],
+  imports: [RouterLink, MatProgressSpinner, TranslatePipe],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

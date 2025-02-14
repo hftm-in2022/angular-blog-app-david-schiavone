@@ -7,18 +7,31 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>{{ "menu" | translate }}</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/">Übersicht</a>
+      <a mat-list-item routerLink="/">{{ "overview" | translate }}</a>
       @if (canAddBlogs()) {
-        <a mat-list-item routerLink="/add-blog">Erstellen</a>
+        <a mat-list-item routerLink="/add-blog">{{ "create" | translate }}</a>
       }
       @if (loggedIn()) {
-        <a mat-list-item (click)="logout()">Logout</a>
+        <a mat-list-item (click)="logout()">{{ "logout" | translate }}</a>
         <p class="meta-info username">{{ userName() }}</p>
       } @else {
-        <a mat-list-item (click)="login()">Login</a>
+        <a mat-list-item (click)="login()">{{ "login" | translate }}</a>
       }
+      <div class="language-switches"></div>
+
+      <div class="language-switcher">
+        @for (language of languages; track language) {
+          <button
+            mat-button
+            (click)="changeLanguage(language)"
+            [ngClass]="{ disabled: isCurrentLanguage(language) }"
+          >
+            {{ getLanguageKey(language) | translate }}
+          </button>
+        }
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

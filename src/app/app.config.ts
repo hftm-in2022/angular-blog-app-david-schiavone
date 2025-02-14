@@ -12,6 +12,7 @@ import {
 import { routes } from './app.routes';
 import {
   HTTP_INTERCEPTORS,
+  HttpClient,
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
@@ -20,6 +21,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { GlobalErrorHandler } from './core/error-handler/global-error-handler';
 import { authConfig } from './core/auth/auth.config';
 import { AuthInterceptor, provideAuth } from 'angular-auth-oidc-client';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,6 +41,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAuth(authConfig),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     // {
     //   provide: ErrorHandler,
     //   useClass: GlobalErrorHandler,
